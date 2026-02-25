@@ -1,0 +1,327 @@
+/* === Reset & Base === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #6b7280;
+  --border: #e5e7eb;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --transition: 200ms ease;
+}
+
+/* Role color themes — set on <body data-role="..."> */
+[data-role="pat-brown"]       { --accent: #16a34a; --accent-light: #f0fdf4; --accent-mid: rgba(22,163,74,0.12); }
+[data-role="rancher"]         { --accent: #92400e; --accent-light: #fffbeb; --accent-mid: rgba(146,64,14,0.10); }
+[data-role="burger-king"]     { --accent: #d97706; --accent-light: #fffbeb; --accent-mid: rgba(217,119,6,0.10); }
+[data-role="scientist"]       { --accent: #0369a1; --accent-light: #f0f9ff; --accent-mid: rgba(3,105,161,0.10); }
+[data-role="health-advocate"] { --accent: #dc2626; --accent-light: #fef2f2; --accent-mid: rgba(220,38,38,0.10); }
+[data-role="investor"]        { --accent: #7c3aed; --accent-light: #faf5ff; --accent-mid: rgba(124,58,237,0.10); }
+
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  min-height: 100dvh;
+}
+
+/* === Scroll progress bar === */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 200;
+  width: 100%;
+  transition: none;
+}
+
+/* === Hero === */
+.hero {
+  background: var(--accent);
+  color: #fff;
+  padding: 28px 20px 24px;
+  border-radius: 0 0 20px 20px;
+  box-shadow: var(--shadow-md);
+}
+.hero__icon { font-size: 32px; margin-bottom: 4px; }
+.hero__title { font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 4px; }
+.hero__subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 12px; }
+.hero__quote {
+  font-size: 13px;
+  font-style: italic;
+  opacity: 0.85;
+  border-left: 2px solid rgba(255,255,255,0.4);
+  padding-left: 12px;
+  line-height: 1.4;
+}
+.hero__quote-attr { font-style: normal; opacity: 0.7; display: block; margin-top: 4px; font-size: 12px; }
+
+/* === Content === */
+.content { padding: 16px; max-width: 640px; margin: 0 auto; }
+
+/* === Section cards === */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.card__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.card__title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.card p, .card li {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.55;
+}
+.card ul { padding-left: 18px; }
+.card li { margin-bottom: 8px; }
+.card li:last-child { margin-bottom: 0; }
+
+/* === Intel / Secret Briefing card === */
+.card--intel {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  border-color-top: var(--border);
+  position: relative;
+}
+.card--intel .card__label {
+  background: var(--accent-mid);
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+/* Scroll-reveal animation */
+.card--intel.reveal-ready {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+.card--intel.reveal-ready.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Big number callouts === */
+.callouts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.callout {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.callout__number {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.callout__label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+/* === Blockquote / pull quote === */
+.pull-quote {
+  position: relative;
+  padding: 12px 16px;
+  margin: 12px 0;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+}
+.pull-quote .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.pull-quote .copy-btn:hover,
+.pull-quote .copy-btn:active { opacity: 0.8; }
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--text);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 300;
+  pointer-events: none;
+}
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* === Discussion prompts === */
+.prompt-list { list-style: none; padding: 0; counter-reset: prompt; }
+.prompt-list li {
+  counter-increment: prompt;
+  padding: 10px 12px 10px 40px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.prompt-list li::before {
+  content: counter(prompt);
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === Quick facts accordion === */
+.accordion { margin-top: 16px; margin-bottom: 32px; }
+.accordion summary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 10px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary::before {
+  content: '>';
+  font-family: monospace;
+  font-size: 14px;
+  transition: transform var(--transition);
+  display: inline-block;
+}
+.accordion[open] summary::before { transform: rotate(90deg); }
+.accordion .accordion-content {
+  padding: 8px 0 8px 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.accordion .accordion-content li { margin-bottom: 6px; }
+
+/* === Landing page === */
+.landing { padding: 24px 16px; max-width: 640px; margin: 0 auto; }
+.landing__header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.landing__title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.landing__subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.role-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 14px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  -webkit-tap-highlight-color: transparent;
+}
+.role-card:active {
+  transform: scale(0.97);
+  box-shadow: var(--shadow-md);
+}
+.role-card__icon { font-size: 36px; margin-bottom: 8px; }
+.role-card__name { font-size: 14px; font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
+.role-card__tagline { font-size: 12px; color: var(--text-secondary); line-height: 1.3; }
+.role-card--pat-brown       { border-left: 4px solid #16a34a; }
+.role-card--rancher         { border-left: 4px solid #92400e; }
+.role-card--burger-king     { border-left: 4px solid #d97706; }
+.role-card--scientist       { border-left: 4px solid #0369a1; }
+.role-card--health-advocate { border-left: 4px solid #dc2626; }
+.role-card--investor        { border-left: 4px solid #7c3aed; }
+
+.landing__footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* === Print === */
+@media print {
+  .scroll-progress, .toast { display: none !important; }
+}
